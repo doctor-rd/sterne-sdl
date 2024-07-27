@@ -1,10 +1,10 @@
 CFLAGS = -O2
 
 sterne:	sterne.o
-		$(CC) sterne.o `sdl-config --libs` -lGL -o sterne
+		$(CC) $^ `sdl-config --libs` -lGL -o $@
 
 sterne.o:	sterne.c
-		$(CC) $(CFLAGS) -c sterne.c `sdl-config --cflags`
+		$(CC) $^ $(CFLAGS) -c `sdl-config --cflags`
 
 clean:
 		rm -f *.o sterne
