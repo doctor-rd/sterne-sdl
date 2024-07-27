@@ -8,29 +8,29 @@
 int h=0,w=0;
 int n=0;
 
-GLdouble speed=0.1;
+GLfloat speed = .1f;
 
 // Ein paar Einstellungen
 #define mostdist 40
 #define radius 25
 
-GLdouble rnd() //erzeugt Zufallszahlen zwischen 0 und 1
+GLfloat rnd()
 {
-  return (GLdouble)rand() / (GLdouble)RAND_MAX;
+  return (GLfloat)rand() / (GLfloat)RAND_MAX;
 }
 
 typedef struct
 {
-  GLdouble x;
-  GLdouble y;
-  GLdouble z;
+  GLfloat x;
+  GLfloat y;
+  GLfloat z;
 } Position;
 
 Position *stars;
 
-void bright( double b )
+void bright(GLfloat b)
 {
-  glColor3d( b , b , b );
+  glColor3f(b, b, b);
 }
 
 void draw()
@@ -44,10 +44,10 @@ void draw()
   {
     pos=stars[i];
     bright(1-pos.z/40);
-    glVertex3dv((GLdouble*)&pos);
+    glVertex3fv((GLfloat*)&pos);
     pos.z-=speed*5;
     bright(1-pos.z/40);
-    glVertex3dv((GLdouble*)&pos);
+    glVertex3fv((GLfloat*)&pos);
   }
 
   glEnd();
@@ -63,15 +63,15 @@ void initgl()
   glLoadIdentity();
   glFrustum(-1.0, 1.0, -ratio, ratio, 1, 40);
   glMatrixMode(GL_MODELVIEW);
-  glRotated(180,0,1,0); // Wichtig
-  glTranslated(0,0,1);
+  glRotatef(180.f, 0.f, 1.f, 0.f);
+  glTranslatef(0.f, 0.f, 1.f);
   glEnable(GL_DEPTH_TEST);
 }
 
 void move()
 {
   int i;
-  GLdouble *z;
+  GLfloat *z;
 
   for( i=0 ; i<n ; i++ )
   {
